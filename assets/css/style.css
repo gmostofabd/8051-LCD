@@ -22,11 +22,8 @@ h3{
 
 p{
     text-align: justify;
-    /*font-family:courier;
-    font-size: 10%;
-    */
     font-family:verdana;
-    font-size: 120%;
+    font-size: 130%;
   }  
 
 img {
@@ -61,32 +58,6 @@ img {
 	background-color:#dddddd; */
   }
 
-#root_cont{
-    width: 1000px;
-    height: 800px;
-    background-color:#112233;
-    margin: auto;
- }
-
-#left_col{
-    width: 200px;
-    height: 1000px;
-    background-color:#7f8fa0;
-    float: left;
- }
-#middle_col{
-    width: 500px;
-    height: auto;
-    background-color:#e5e8ec;
-    float: left;
- }
-
-#right_col{
-    width: 300px;
-    height: 1000px;
-    background-color:#15ac22;
-    float: left;
- }
 
 #proj_lst_cont {
     width: 175px; height: auto;
