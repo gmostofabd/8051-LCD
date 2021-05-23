@@ -13,27 +13,21 @@
 
 <body  bgcolor=white>
 
-	<div id="header_common">
-	<img src="assets/images/github_banner.png" alt="common_header" width="1083" height="150">
-	</div>
-
-	<div id="topic_container">
-		<h2 >Topic : LCD Interfacing with 8051 Microcontroller</h2>
-	</div>
+	<div id="header_common"><img src="assets/images/github_banner.png" alt="common_header" width="1083" height="150"></div>
+	<div id="topic_container"><h2>Topic : LCD Interfacing with 8051 Microcontroller</h2></div>
 
 
-    <table align = center width=1000 height=1000 border="1" bgcolor= white>
-	<tr>
-	<td width=200 bgcolor=white valign=top>
+  <table align = center width=1000 height=1000 border="1" bgcolor= white>
+	  <tr>
+	    <td width=200 bgcolor=white valign=top>
 
-
-		<div id=rcorners2>
+		    <div id=rcorners2>
             <ol><h3>8051 Experiment List:</h3>
                 <li><a href>LED Blink</a></li>
                 <li>Push Button Interfacing</li>
-                <li>Seven Segment Display Interfacing</li>
+                <li><a href="https://gmostofabd.github.io/8051-7Segment/">Seven Segment Display Interfacing</a></li>
                 <li>LED Dot Matrix Display Interfacing</li>
-                <li><a href="https://gmostofabd.github.io/lcd-8051/">LCD Interfacing</a></li>
+                <li><a href="https://gmostofabd.github.io/8051-LCD/">LCD Interfacing</a></li>
                 <li>Potentiometer (or Analog) Reading</li>
                 <li>Key Pad Matrix Interfacing</li>
                 <li><a href="https://gmostofabd.github.io/dc-motor-8051/">DC Motor Interfacing</a></li>
@@ -43,10 +37,10 @@
                 <li>Bluetooth interfacing</li>
                 <li>7 Segment Clock</li>
                 <li>Serial Communication</li>
-              </ol>
-          </div>
+            </ol>
+        </div>
 
-          <div id="proj_lst_cont">
+        <div id="proj_lst_cont">
             <ol><h3>8051 Projects:</h3>
               <li>Access Control System</li>
               <li>6 Digit Clock</li>
@@ -54,276 +48,286 @@
               <li>Line Follower</li>
               <li>Incubator Controller</li>
             </ol>
-          </div>         
+        </div>         
 
     </td>
 
 
 
-	<td width=600 align=center valign=top style="padding-left: 10px; padding-right: 10px;">
+	  <td width=600 align=center valign=top style="padding-left: 10px; padding-right: 10px;">
 		
-		<h3 align=left>Introduction:</h3>
-		<p>
-      A Liquid Crystal Display commonly abbreviated as LCD is basically 
-      a display unit built using Liquid Crystal technology. 
-      It is an inevitable part in almost all embedded projects and this 
-      article is about interfacing a 16×2 LCD with 8051 microcontroller. 
-      Many guys find it hard to interface LCD module with the 8051 but 
-      the fact is that if you learn it properly, its a very easy job and 
-      by knowing it you can easily design embedded projects like digital 
-      voltmeter / ammeter, digital clock, home automation displays, 
-      status indicator display, digital code locks, digital 
-      speedometer/ odometer, display for music players etc etc.<br><br>
-  
-      Thoroughly going this article will make you able to display any 
-      text (including the extended characters) on any part of the 16×2 
-      display screen. In order to understand the interfacing first you 
-      have to know about the LCD modules.
-                  <br><br>
+		  <h3 align=left>Introduction:</h3>
+		  <p>
+        A Liquid Crystal Display commonly abbreviated as LCD is basically 
+        a display unit built using Liquid Crystal technology. 
+        It is an inevitable part in almost all embedded projects and this 
+        article is about interfacing a 16×2 LCD with 8051 microcontroller. 
+        Many guys find it hard to interface LCD module with the 8051 but 
+        the fact is that if you learn it properly, its a very easy job and 
+        by knowing it you can easily design embedded projects like digital 
+        voltmeter / ammeter, digital clock, home automation displays, 
+        status indicator display, digital code locks, digital 
+        speedometer/ odometer, display for music players etc etc.<br><br>
+    
+        Thoroughly going this article will make you able to display any 
+        text (including the extended characters) on any part of the 16×2 
+        display screen. In order to understand the interfacing first you 
+        have to know about the LCD modules.
+        <br><br>
 	    </p>
 
-
-
-        <h3>Hardware Discussion: Seven Segment Display (SSD)</h3>
+      <h3>Hardware Discussion: Liquid Crystal Display (LCD)</h3>
 	
-        <div class="box"><img src="assets/images/7-seg.jpg"/></div>
-        <div class="capt_cont">Fig: Basic Seven Segment Display</div>
-
-
-
-        <ul class="inside"><h3>SSD Features Features:</h3>
-		  <li>Available in two modes Common Cathode (CC) and Common Anode (CA)</li>
-		  <li>Available in many different sizes like 9.14mm,14.20mm,20.40mm,38.10mm,57.0mm and 100mm (Commonly used/available size is 14.20mm)</li>
-		  <li>Available in many packages like single and multi digit. There are some custom packages like clocks, meters, panels etc.</li>
-		  <li>Available colours: White, Blue, Red, Yellow and Green etc.</li>
-		  <li>Low current operation</li>
-		  <li>Better, brighter and larger display than conventional LCD displays.</li>
-		  <li>Current consumption : 30mA / segment</li>
-          <li>Peak current : 70mA.</li>
-          <li>Distance readable display dislike LCD's.</li>
-		</ul>
-		<br>
+      <div class="box"><img src="assets/images/lcd_models.png"/></div>
+      <div class="capt_cont">Fig: Some of available LCD modules</div>
 
 
 
 
-        <h3 align=left>SSD Basics :</h3>
-
-        <div class="box_80"><img src="assets/images/7seg_intro.png"/></div>
-        <div class="capt_cont">Fig: SSD Pinout and internal circuit</div>
-
-
-
-
-        <p>
-            A seven segment display consists of seven LEDs arranged in the form 
-            of a squarish‘8’ slightly inclined to the right and a single LED as 
-            the dot character. Differentcharacters can be displayed by 
-            selectively glowing the required LED segments.
-
-            <br><br>The displays common pin is generally used to identify which 
-            type of 7-segmentdisplay it is. As each LED has two connecting pins, 
-            one called the “Anode” andthe other called the “Cathode”, there are 
-            therefore two types of 7-segment displaycalled: Common Cathode7(CC) 
-            and Common Anode8(CA).
-            <br><br>	
+      <h3>LCD Features :</h3>
+            
+      <ul class="inside">
+          <li>Alphanumeric LCD display module, meaning can display alphabets and numbers.</li>
+          <li>16x2 LCD consists of two rows and each row can print 16 characters.</li>
+          <li>Each character is build by a 5×8 pixel box.</li>
+          <li>Can work on both 8-bit and 4-bit mode.</li>
+          <li>It can also display any custom generated characters</li>
+          <li>Available in Green and Blue Back light.</li>
+          <li>Combinations available like, 8x1, 8x2, 16x1, 16x2, 16x4, 20x4 etc.</li>
+          <li>Operating Voltage is 4.7V to 5.3V.</li>
+          <li>Current consumption is 1mA without back light.</li>
+      </ul>
+        <br>
+      <h3>LCD Basics :</h3>
+        <p align=justify>
+          16×2 LCD module is a very common type of LCD module that is used in this tutorial. The pin 
+          numbers, their name and corresponding functions are shown in the table  below.
         </p>
 
-        <h3>How to Drive SSD's ?</h3>
+        <div class="box">
+          <img src="assets/images/LCD_Pinout.png" alt="LCD mdules">
+        </div>
+        <div class="capt_cont">
+          Fig: LCD Pinout with description
+        </div>
+
+
+
+
+
+        <h3>How it works?</h3>
+        <blockquote>
+        <p align=justify>
+          Now, we know that each character has (5×8=40) 40 Pixels and for 32 Characters we will have 
+          (32×40) 1280 Pixels. Further, the LCD should also be instructed about the Position of the 
+          Pixels. Hence it will be a hectic task to handle everything with the help of MCU, hence an 
+          Interface IC like HD44780 is used, which is mounted on the backside of the LCD Module itself. 
+          The function of this IC is to get the Commands and Data from the MCU and process them to 
+          display meaningful information onto our LCD Screen.<br><br>
         
-            <img src="assets/images/ssd_drive2.png" class="zoom"/>
-
-            <div class="capt_cont">Fig: How to use a 7 Segment Display</div>
-
-
-	    <blockquote>
-	    <p>
-            A CC SSD circuit activity has shown at left of above figure. We can 
-            see that only two switches (b and c) are closed and all other 
-            switches are open. So, we can produce the binary data pattern as 
-            00000110 which is equivalent to 03H. And we are getting the decimal 
-            value 1 is illuminated on the display. And Now we can have all the 
-            required data patterns for displaying 0 to 9 using the same method 
-            as in the table of above figure.
+          A 16×2 LCD has two registers like data register and command register. TheRS(register select) 
+          is mainly used to change from one register to another. Whenthe register set is ‘0’, then it 
+          is known ascommand register. Similarly, when theregister set is ‘1’, then it is known as data 
+          register.
+          
+          <br><br>The main function of the command register is to store the instructions of command 
+          which are given to the display. So that predefined tasks can be performed such as clearing 
+          the display, initializing, set the cursor place, and display control.<br><br>
+          
+          The main function of the data register is to store the information which is tobe exhibited 
+          on the LCD screen.  Here, the ASCII value of the character is theinformation. Whenever we 
+          send the information to LCD, it transmits to the dataregister, and then the process will 
+          be starting there.
         </p>
-	    </blockquote>
+        </blockquote>
 
-        <h3>Circuit Diagram : Seven Segment Display to 8051.</h3>
 
-        <div class="box_ckt_diag"><img src="assets/images/SSD_1D_Counter.png"/></div>
+        Now we can start for the test of a LCD. To do that we need to code for thecommon steps:
+
+        <h3>Programming LCD to Microcontroller :</h3>
+        <p>Coming to the programming you should follow these steps:</p>
+         <ul>
+          <li><strong>STEP1</strong>: Initialization of LCD</li>
+          <li><strong>STEP2</strong>: Sending command to LCD.</li>
+          <li><strong>STEP3</strong>: Writing the data to LCD.</li>
+          </ul>
+
+        <h3>LCD initialization :</h3>
+        <p>To initialize LCD to the 8051 the following instruction and commands are to 
+            beembed in to the functions
+        </p>
+          <ul>
+            <li>Send <strong>38H</strong> to the 8 bit data line for initialization</li>
+            <li>Send <strong>0FH</strong> for making LCD ON, cursor ON and cursor blinking ON.</li>
+            <li>Send <strong>06H</strong> for increment cursor position.</li>
+            <li>Send <strong>01H</strong> for clearing the display and return the cursor.</li>
+          </ul>
+
+
+
+          <h3>Sending data to the LCD :</h3>
+          <blockquote>
+          <p>The steps for sending data to the LCD module is given below. I have 
+              already said that the LCD module has pins namely RS, R/W and E. 
+              It is the logic state of these pins that make the module to 
+              determine whether a given data input is a command or data to be displayed.
+          </p>
+          </blockquote>
+
+
+            <ul>
+              <li>Make R/W low.</li>
+              <li>Make RS=0 if data byte is a command and make RS=1 if the data byte is adata to be displayed.</li>
+              <li>Place data byte on the data register.</li>
+              <li>Pulse E from high to low.</li>
+              <li>Repeat above steps for sending another data.</li>
+            </ul>
+
+
+        <h3>Circuit Diagram : 8 bit LCD Interfacing to 8051.</h3>
+
+        <div class="box_ckt_diag"><img src="assets/images/LCD_8B_8051_Ckt.png"/></div>
         <div class="capt_cont">Fig: A Single Digit Seven Segment Display Circuit.</div>
 
 
 
+        <h3>Circuit Discussion :</h3>
 
         <blockquote>
         <p>
-        <strong>Circuit Discussion :</strong>
-        The circuit diagram shown above is of an AT89S51 microcontroller based 0 
-        to 9 counter which has a 7 segment LED display interfaced to it in order 
-        to display the count.  This simple circuit illustrates two things. How 
-        to setup simple 0 to 9 up counter using 8051 and more importantly how 
-        to interface a seven segment LED display to  8051 in order to display 
-        a particular result. The common cathode seven segment display D1 is 
-        connected to the Port 1 of the microcontroller (AT89S51) as shown in the 
-        circuit diagram. R3 to R10 are current limiting resistors. S3 is the 
-        reset switch and R2,C3 forms a debouncing circuitry. C1, C2 and X1 are 
-        related to the clock circuit. The software part of the project has to do 
-        the following tasks.
-        
-        <br><br>
+          The circuit diagram given above shows how to interface a 16×2 LCD module with AT89S1 
+          microcontroller. Capacitor C3, resistor R3 and push button switchS1 forms the reset 
+          circuitry. Ceramic capacitors C1,C2 and crystal X1 is related tothe clock circuitry 
+          which produces the system clock frequency. P1.0 to P1.7 pins ofthe microcontroller 
+          is connected to the DB0 to DB7 pins of the module respectively and through this route 
+          the data goes to the LCD module. P3.3, P3.4 and P3.5 are connected to the E, R/W, RS 
+          pins of the microcontroller and through this route the control signals are transferred 
+          to the LCD module. Resistor R1 limits the current through the back light LED and so 
+          do the back light intensity. POT R2 is used for adjusting the contrast of the display. 
+          Program for interfacing LCD to 8051 micro-controller is shown below.
         </p>
         </blockquote>
 
-        <ul class="inside">
-            <li>Form a 0 to 9 counter with a predetermined delay (around 1/2 second here).</li>
-            <li>Convert the current count into digit drive pattern.</li>
-            <li>Put the current digit drive pattern into a port for displaying.</li>
-        </ul>
 
-
-        <h3>Assembly Program : <a href="https://github.com/gmostofabd/8051-7Segment/blob/main/codes/7seg_1d_8051.asm">7seg_1D_8051.asm</a></h3>
+        <h3>Assembly Program : <a href="https://github.com/gmostofabd/8051-7Segment/blob/main/codes/7seg_1d_8051.asm">lcd_8bit_8051.asm</a></h3>
         <div class="prog_cont">
-            <embed type="text/html" src="/codes/7seg_1d_8051.asm"  width="500" height="500">
+            <embed type="text/html" src="codes/lcd_8bit.asm"  width="500" height="500">
+        </div>
+
+        <h3>Code Discussion:</h3>
+
+        <h3>Post Run Discussion : LCD 4 bit mode interfacing</h3>
+        <blockquote>
+        <p align=justify>
+          The microcontroller like 8051 has only limited number of GPIO pins. So to design complex 
+          projects we need sufficient number of I/O pins . An LCD module can be interfaced with a 
+          microcontroller either in 8 bit mode (as seen above) or in 4 bit mode. 8 bit mode is the 
+          conventional mode which uses 8 data lines and RS, R/W,E pins for functioning. However 4 
+          bit mode uses only 4 data lines along with thecontrol pins. This will saves the number 
+          of GPIO pins needed for other purpose. Ifyou already know how to interface LCD with 
+          microcontroller in 8 bit mode then it is not difficult to interface LCD in 4 bit mode.
+
+          <br><br>In 4 bit interfacing mode that we only use 4 data lines [DB4-DB7] of LCD. 
+          As we are going to use only 4 data lines so we need to send data in group of 4 
+          bits( called nibble). The Higher nibble is send first and then lower nibble is send. 
+          In this program i use two memory location to store my upper and lower nibble after 
+          separating a 8 bit data.
+        </p>
+        </blockquote>
+
+        <h3>Circuit Diagram :</h3>
+              
+        <div class="box_ckt_diag">
+          <img src="assets/images/LCD_4B_8051_Ckt.png" alt="ckt_diagram" width="600" height="350">
+        </div>
+
+        <div class="capt_cont">
+          Fig: LCD interfacing (4 bit mode) with 8051
         </div>
 
 
-
-        <h3>Theory Part 2/2 : Multiplexing SSDs</h3>
-        <p>
-            Suppose you need a three digit display connected to the 8051. Each 7 
-            segment display have 8 pins and so a total amount of 24 pins are to 
-            the connected to the microcontroller and there will be only 8 pins 
-            left with the microcontroller for other input output applications. 
-            Also the maximum number of displays that can be connected to the 8051 
-            is limited to 4 because 8051 has only 4 ports. More over three 3 
-            displays will be ON always and this consumes a considerable amount of 
-            power. All these problems associated with the straight forward method 
-            can be solved by  multiplexing .
+        <h3>Circuit Discussion :</h3>
+        <blockquote>
+        <p align=justify>
+          As shown in the circuit diagram, port 0 of the controller is used for interfacingit with 
+          LCD module. In 4 bit mode only 4 linesD4-D7, along with RS, R/W andE pins are used. 
+          This will save us 4 pins of our controller which we might employ itfor other purpose. Here 
+          we only need to write to the LCD module. So the R/W pincan be ground it as shown in the schematic 
+          diagram. In this way the total numberof pins can be reduced to 6. In 4 Bit mode the data bytes are 
+          split into two fourbits and are transferred in the form of a nibble. The data transmission to a 
+          LCD isperformed by assigning logic states to the control pins RS and E. The reset circuit,oscillator 
+          circuit and power supply need to be provided for the proper working ofthe circuit.
         </p>
+        </blockquote>
 
 
-        <div class="box_50"><img src="assets/images/3Steps_1.png"/></div>
-        <div class="capt_cont">Fig: Multiple digit Multiplexing tecnique.</div>
-
-        <p>In multiplexing all displays are connected in parallel to one port 
-            and only one display is allowed to turn ON at a time, for a short 
-            period. This cycle is repeated for at a fast rate and due to the 
-            persistence of vision of human eye, all digits seems to glow. The 
-            main advantages of this method are
-        </p>
-
-            <ul class="inside">
-                <li>Fewer number of port pins are required .</li>
-                <li>Consumes less power.</li>
-                <li>More number of display units can be interfaced (maximum 24).</li>
-            </ul>
-
-
-        <h3>Circuit Diagram : Seven Segment Display to 8051.</h3>
-
-            <div class="box_ckt_diag"><img src="assets/images/SSD_2D_Counter.png"/></div>
-            <div class="capt_cont">Fig: two Digit Seven Segment Display Circuit.</div>
-
-
-
-        <h3 align=left>Circuit Discussion :</h3>
-        <p>
-            When assembled and powered on, the circuit will display the number
-            ’16’ and let us see how it is done. Initially the first display is 
-            activated by making  P3.0 high and then digit drive pattern for “1” 
-            is loaded to  the Port 1. This will make the first display to show 
-            “1”. In the mean time P3.1 will be low and so do the second display 
-            will be OFF. This condition is maintained for around 1ms and then 
-            P3.0 is made low. Now both displays will be OFF. Then the second 
-            display is activated by making P3.1 high and then the digit drive 
-            pattern for “6” is loaded to the port 1. This will make the second 
-            display to show “6”. In the mean time P3.0 will be low and so the 
-            second display will be OFF.  This condition is maintained for 
-            another 1ms and then port 3.1 is made low. This cycle is repeated 
-            and due to the persistence of vision you will feel it as “16”.
-
-            <br><br>Transistor Q1 drives the first display (D1) and transistor 
-            Q2 drives the second display (D2). R11 and R12 are the base current 
-            limiting resistors of Q1 and Q2. The purpose of other components 
-            are explained in the first circuit.
-        </p>
-
-        <h3>Assembly Program : 7seg_2D_8051.asm</h3>
+        <h3>Assembly Program : lcd_4bit_8051.asm</h3>
         <div class="prog_cont">
-        <embed type="text/html" src="codes/7seg_2d_8051.asm"  width="500" height="500">
+          <embed type="text/html" src="codes/lcd_4bit.asm"  width="500" height="500">
         </div>
-
 
     </td>
 
-	<td valign=top>
+	  <td valign=top>
 		
-		<iv id=box_this_lesson>
-			<h3 align=left>This lesson includes:</h3>
-			<ol>
-				<li>Introduction</li>
-				<li>Hardware Discussion</li>
-				<li>Circuit Diagram</li>
-				<li>Assembly Code</li>
-				<li>Post Run Discussion</li>
-				<li>Exercises</li>
-				<li>Tips and Tricks</li>
-			</ol>
-		</iv>
+      <div id=box_this_lesson>
+        <h3 align=left>This lesson includes:</h3>
+        <ol>
+          <li>Introduction</li>
+          <li>Hardware Discussion</li>
+          <li>Circuit Diagram</li>
+          <li>Assembly Code</li>
+          <li>Post Run Discussion</li>
+          <li>Exercises</li>
+          <li>Tips and Tricks</li>
+        </ol>
+      </div>
 
 
-        <div class="vdo_lst_cont">
-            <h3>Video demonstration of this lesson-</h3>
-            <iframe width="155" height="100"
-              src="https://www.youtube.com/embed/tgbNymZ7vqY">
+      <div class="vdo_lst_cont">
+          <h3>Video demonstration of this lesson-</h3>
+          <iframe width="155" height="100"
+          src="https://www.youtube.com/embed/tgbNymZ7vqY">
             </iframe>
-        </div>
+      </div>
 
-        <div class="vdo_lst_cont">
-            <h3>Important Downloads</h3>
-            <ul class="inside">
-              <li>Proteus 8.7</li>
-              <li>MIDE-51 IDE</li>
-              <li>AVRDUDES</li>
-            </ul>
-        </div>
-
-
-        <div class="surveyorderedlist">
-            <span><b>Lesson Contents</b></span>
-            <ol>
-                <li>Circuit Diagram (Proteus)</li>
-                <li>Lesson PDF</li>
-                <li>7seg_1d_8051.asm</li>
-                <li>7seg_2d_8051.asm</li>
-                <li>7segment Datasheet PDF</li>
-                <li>Exercise Solutions</li>
-              </ol>
-        </div>
+      <div class="vdo_lst_cont">
+          <h3>Important Downloads</h3>
+          <ul class="inside">
+            <li>Proteus 8.7</li>
+            <li>MIDE-51 IDE</li>
+            <li>AVRDUDES</li>
+          </ul>
+      </div>
 
 
-
+      <div class="surveyorderedlist">
+          <span><b>Lesson Contents</b></span>
+          <ol>
+              <li>Circuit Diagram (Proteus)</li>
+              <li>Lesson PDF</li>
+              <li>7seg_1d_8051.asm</li>
+              <li>7seg_2d_8051.asm</li>
+              <li>7segment Datasheet PDF</li>
+              <li>Exercise Solutions</li>
+          </ol>
+      </div>
 
     </td>
 
 
 	</tr>
          
-    </table>
+  </table>
 
-    <table width=1000 height=50 align= center border="1">
-		<tr>
+  <table width=1000 height=50 align= center border="1">
+	  <tr>
 			<td>Prev topic: Push Button Interfacing with 8051</td>
 			<td>Next topic: LED Matrix interfacing with 8051</td>
 		</tr>
-    </table>
+  </table>
 
-	<div id="footer_common"></div>
-    <div id="wrp_prj_footer">
-
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="prj_footer_cell">
+	<div id="footer_common">
     <font face="Verdana, Arial, Helvetica, sans-serif" color="#0000ff" size="3" ><strong>Melab Site Map </strong></font>
     <div id="navcontainer">
     <ul id="navlist">
@@ -335,14 +339,11 @@
         <li><a href="http://www.melab-bd.com/contact.html"><strong>Contact</strong></a></li>
     </ul>
     </div>	
-        
-    
-    </div>
-    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    
 
 
-    </div>
+
+  </div>
+    
 
 </body>
 
