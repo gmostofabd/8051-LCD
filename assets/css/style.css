@@ -41,10 +41,11 @@ li{
 
 blockquote {
     background: #f9f9f9;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
+    margin: 1.5em 5px;
+    padding: 0.5em 5px;
     quotes: "\201C""\201D""\2018""\2019";
   }
+
 
 #header_common{
     width:1000px; height:150px; 
