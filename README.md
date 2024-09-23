@@ -1,9 +1,13 @@
 # ⚙️ **8051 LCD**
+<p align="center">
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/lcd_models.png" alt="AT89C51 Calculator" width="70%">
+</p>
+
 
 LCD and Keypad Interfacing with the **8051** Microcontroller (Assembly Code and Proteus Simulation).
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/78910261/196782553-d76d9e44-f03c-4bfc-af3d-b1f85cf36e33.png" alt="AT89C51 Calculator" width="70%">
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_8B_8051_Ckt.png" alt="AT89C51 Calculator" width="70%">
 </p>
 
 Using a 1602 LCD with microcontrollers like the 8051 (or any other microcontroller) and simulating the circuit in Proteus requires several steps. The 1602 LCD is a common 16x2 character display used in embedded systems to display information.
@@ -24,6 +28,23 @@ The program is written in **[Assembly language](https://en.wikipedia.org/wiki/As
 The project has been successfully tested on both simulation and real hardware setups, ensuring reliability and accuracy.
 
 ---
+
+## 📦 **Contents**
+
+<div align="center">
+
+| File                          | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| `AT89C51_LCD_Keypad.asm`       | Assembly source code for the AT89C51 microcontroller                        |
+| `AT89C51_LCD_Keypad.hex`       | Precompiled HEX file for direct microcontroller upload                      |
+| `Proteus_Simulation.pdsprj`    | Proteus Design Suite simulation file                                        |
+| **Screenshots**                | Visual demonstrations from the Proteus simulation                          |
+
+</div>
+
+---
+
+
 
 ## 🔑 **Keywords**
 
@@ -54,20 +75,73 @@ The project has been successfully tested on both simulation and real hardware se
 
 ---
 
-## 📦 **Contents**
 
-<div align="center">
+## 📺 **Alphanumeric LCD Overview**
 
-| File                          | Description                                                                 |
-|-------------------------------|-----------------------------------------------------------------------------|
-| `AT89C51_LCD_Keypad.asm`       | Assembly source code for the AT89C51 microcontroller                        |
-| `AT89C51_LCD_Keypad.hex`       | Precompiled HEX file for direct microcontroller upload                      |
-| `Proteus_Simulation.pdsprj`    | Proteus Design Suite simulation file                                        |
-| **Screenshots**                | Visual demonstrations from the Proteus simulation                          |
+### What is an Alphanumeric LCD?
+An **Alphanumeric Liquid Crystal Display (LCD)** is a flat-panel display that can show both letters and numbers. These displays typically consist of a grid of pixels that can be controlled to represent characters, symbols, and sometimes simple graphics.
 
-</div>
+### Common Features
+- **Character Format**: Most alphanumeric LCDs are designed with a grid structure, often 16x2 or 20x4, meaning they can display 16 characters in 2 rows or 20 characters in 4 rows, respectively.
+- **Backlight Options**: Many models come with a backlight feature, enhancing visibility in low-light conditions.
+- **Interface**: They usually communicate via parallel or serial interfaces (e.g., I2C, SPI), allowing for easy integration with microcontrollers.
+- **Low Power Consumption**: Alphanumeric LCDs consume minimal power, making them ideal for battery-operated devices.
+
+### Applications
+- **Embedded Systems**: Widely used in projects with microcontrollers for displaying data and user interfaces.
+- **Consumer Electronics**: Found in devices such as microwaves, clocks, and remote controls.
+- **Industrial Equipment**: Utilized in control panels and monitoring systems.
+
+### Advantages
+- **Cost-Effective**: Generally cheaper than graphic LCDs, making them suitable for budget-sensitive applications.
+- **Simple Integration**: Easy to interface with common microcontrollers, requiring minimal programming effort.
+
+### Limitations
+- **Limited Graphics**: Cannot display complex graphics or images, only predefined characters and symbols.
+- **Viewing Angles**: Depending on the technology, viewing angles may be limited compared to more advanced display types.
+
+### Key Components
+- **Liquid Crystal Layer**: The core technology that modulates light to display characters.
+- **Electrodes**: Conductive layers that apply voltage to control the liquid crystals.
+- **Controller IC**: Manages the display and interprets commands sent from a microcontroller.
 
 ---
+
+
+
+### Available Types of Alphanumeric LCDs
+
+1. **Character LCDs**
+   - **16x2**: Displays 16 characters per line across 2 lines (common in many projects).
+   - **20x4**: Displays 20 characters per line across 4 lines (used in applications requiring more data display).
+   - **Other Variants**: Sizes can vary (e.g., 8x2, 16x4) depending on specific applications.
+
+2. **Graphic LCDs with Alphanumeric Capability**
+   - These displays can show both alphanumeric characters and simple graphics. They typically have higher resolutions and can be used to create custom symbols.
+
+3. **OLED Displays**
+   - Although primarily graphic displays, many OLEDs can show alphanumeric characters. They offer better contrast and viewing angles compared to traditional LCDs.
+
+4. **Segment Displays**
+   - Similar to alphanumeric displays but usually limited to digits and a few letters (e.g., 7-segment displays). These are often used in clocks and basic counters.
+
+5. **Smart LCDs**
+   - Integrated with built-in controllers, allowing for more complex operations without extensive programming. They often support various character sets and may include backlighting.
+
+6. **I2C or SPI Alphanumeric LCDs**
+   - These are character LCDs that use I2C or SPI communication protocols for easier connectivity with microcontrollers, requiring fewer pins for operation.
+
+### Key Considerations
+- **Backlighting**: Many models come with backlighting options, enhancing visibility in low-light environments.
+- **Interface Compatibility**: Ensure compatibility with your microcontroller (e.g., parallel, I2C, SPI).
+- **Operating Voltage**: Commonly available in 5V or 3.3V variants.
+- **Temperature Range**: Consider the operating temperature range for specific applications, especially in industrial settings.
+
+Each type has its strengths and ideal use cases, so the choice depends on your specific project requirements! r
+
+
+
+
 
 ## 🛠️ **Hardware & Circuit Information**
 
@@ -87,7 +161,9 @@ The project has been successfully tested on both simulation and real hardware se
 ---
 
 ### **Circuit Explanation**:
-
+<p align="center">
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_4B_8051_Ckt.png" alt="AT89C51 Calculator" width="70%">
+</p>
 Each component, including the keypad, is connected to the microcontroller's input pins, while resistors are used throughout the circuit to ensure proper current control.
 
 ---
@@ -96,10 +172,8 @@ Each component, including the keypad, is connected to the microcontroller's inpu
 ## 🖥️ **1602 LCD Overview**
 
 <p align="center">
-
-![1602LCD_1](https://github.com/user-attachments/assets/cd65457c-c174-49bc-948d-1a0cfffd286f)
-
-<p/>
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_Pinout.png" alt="AT89C51 Calculator" width="70%">
+</p>
 
 The **1602 alphanumeric LCD** is a type of liquid crystal display that can show alphanumeric characters. It is one of the most common character-based LCD modules used in embedded systems for displaying text and simple symbols. The "1602" designation refers to its **16 columns and 2 rows**, meaning it can display **16 characters per line** and a total of **32 characters** across its two lines.
 
