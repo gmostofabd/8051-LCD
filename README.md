@@ -3,8 +3,10 @@
   <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/lcd_models.png" alt="AT89C51 Calculator" width="70%">
 </p>
 
+This repository demonstrates how to interface a 16x2 alphanumeric LCD with the 8051 Microcontroller using Assembly language. The project is designed to showcase a practical example of sending data from the 8051 microcontroller to an LCD and includes Proteus simulation files for testing and visualization.
 
-LCD and Keypad Interfacing with the **8051** Microcontroller (Assembly Code and Proteus Simulation).
+The project involves setting up the LCD in 4-bit mode to reduce pin usage, which is advantageous for microcontroller projects where limited I/O pins are available. The data is transferred in two 4-bit nibbles, simplifying the circuit while maintaining full functionality.
+
 
 <p align="center">
   <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_8B_8051_Ckt.png" alt="AT89C51 Calculator" width="70%">
@@ -16,48 +18,15 @@ Using a 1602 LCD with microcontrollers like the 8051 (or any other microcontroll
 
 ---
 
-## 📖 **Overview**
-
+#  ⚙️ Project Overview
 This project demonstrates the **interfacing of an LCD and a 4x4 keypad** with the **[AT89C51](https://www.atmel.com/products/microcontrollers/8051.aspx)** Microcontroller, part of the **[8051 MCU](https://en.wikipedia.org/wiki/Intel_MCS-51)** family. This setup allows for input and output operations, making it a practical example for educational purposes and embedded systems applications.
 
-The program is written in **[Assembly language](https://en.wikipedia.org/wiki/Assembly_language)**, optimized for efficiency and performance, and the circuit is simulated using **[Proteus](https://www.labcenter.com/)** (Version 8.9). This repository includes:
-- **[Assembly Code](https://en.wikipedia.org/wiki/Assembly_language)** for LCD and keypad interfacing
-- **Precompiled HEX File** for easy microcontroller programming
-- **[Proteus Simulation Circuit](https://www.labcenter.com/)** demonstrating the project functionality
+In this project, we cover:
 
-The project has been successfully tested on both simulation and real hardware setups, ensuring reliability and accuracy.
-
----
-
-## 📦 **Contents**
-
-<div align="center">
-
-| File                          | Description                                                                 |
-|-------------------------------|-----------------------------------------------------------------------------|
-| `AT89C51_LCD_Keypad.asm`       | Assembly source code for the AT89C51 microcontroller                        |
-| `AT89C51_LCD_Keypad.hex`       | Precompiled HEX file for direct microcontroller upload                      |
-| `Proteus_Simulation.pdsprj`    | Proteus Design Suite simulation file                                        |
-| **Screenshots**                | Visual demonstrations from the Proteus simulation                          |
-
-</div>
-
----
-
-
-
-## 🔑 **Keywords**
-
-**[AT89C51 Microcontroller](https://www.atmel.com/products/microcontrollers/8051.aspx)** | 
-**[8051](https://en.wikipedia.org/wiki/Intel_MCS-51)** | 
-**[Assembly Language](https://en.wikipedia.org/wiki/Assembly_language)** | 
-**[Simulation](https://www.labcenter.com/)** | 
-**[Proteus](https://www.labcenter.com/)** | 
-**[Microcontroller Programming](https://en.wikipedia.org/wiki/Microcontroller)** | 
-**[LCD Interfacing](https://en.wikipedia.org/wiki/Liquid-crystal_display)** | 
-**[Keypad Interfacing](https://en.wikipedia.org/wiki/Keypad)**
-
----
+Configuring the LCD in 4-bit mode to save microcontroller pins.
+Sending commands such as clearing the display, setting the cursor position, and controlling the display (on/off, blinking).
+Displaying alphanumeric characters on the LCD, including custom messages.
+Proper timing and delays to ensure reliable communication between the microcontroller and the LCD.
 
 ## ⚙️ **Key Features**
 
@@ -75,6 +44,53 @@ The project has been successfully tested on both simulation and real hardware se
 
 ---
 
+
+#  🔑 Key Topics
+LCD Interfacing with the 8051 Microcontroller.
+Programming in Assembly language for 8051.
+Simulation using Proteus Design Suite.
+4-bit data communication with an LCD.
+
+#  📦 What’s Included?
+The repository contains the following files:
+
+Assembly Code: The core assembly code that handles the initialization and operation of the LCD.
+Proteus Simulation: A ready-to-use simulation file to test the LCD interface in Proteus.
+HEX File: The compiled HEX file for uploading to the 8051 microcontroller.
+
+🛠️ Hardware Requirements
+Here are the main components used in this project:
+
+AT89C51 Microcontroller: The 8051 microcontroller that drives the LCD.
+16x2 LCD Module: The alphanumeric LCD used for displaying characters.
+Resistor Network: Used for interfacing buttons or other components.
+Power Supply: Typically a 5V supply for both the LCD and microcontroller.
+
+
+The program is written in **[Assembly language](https://en.wikipedia.org/wiki/Assembly_language)**, optimized for efficiency and performance, and the circuit is simulated using **[Proteus](https://www.labcenter.com/)** (Version 8.9). This repository includes:
+- **[Assembly Code](https://en.wikipedia.org/wiki/Assembly_language)** for LCD and keypad interfacing
+- **Precompiled HEX File** for easy microcontroller programming
+- **[Proteus Simulation Circuit](https://www.labcenter.com/)** demonstrating the project functionality
+
+The project has been successfully tested on both simulation and real hardware setups, ensuring reliability and accuracy.
+
+---
+
+
+## 🔑 **Keywords**
+
+**[AT89C51 Microcontroller](https://www.atmel.com/products/microcontrollers/8051.aspx)** | 
+**[8051](https://en.wikipedia.org/wiki/Intel_MCS-51)** | 
+**[Assembly Language](https://en.wikipedia.org/wiki/Assembly_language)** | 
+**[Simulation](https://www.labcenter.com/)** | 
+**[Proteus](https://www.labcenter.com/)** | 
+**[Microcontroller Programming](https://en.wikipedia.org/wiki/Microcontroller)** | 
+**[LCD Interfacing](https://en.wikipedia.org/wiki/Liquid-crystal_display)** | 
+**[Keypad Interfacing](https://en.wikipedia.org/wiki/Keypad)**
+
+---
+
+#  🔗 Additional Information
 
 ## 📺 **Alphanumeric LCD Overview**
 
