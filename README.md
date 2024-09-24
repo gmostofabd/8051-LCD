@@ -278,6 +278,96 @@ For more projects and tutorials, visit [EmbeTronicX](https://www.embetronicx.com
 
 ---
 
+###  Here's a simple assembly code example for interfacing a **16x2 LCD** with the **AT89C51 microcontroller** in **8-bit mode**. This code initializes the LCD, sends commands, and displays a string. 
+
+### Assembly Code for 8-Bit Mode LCD Interfacing
+
+```assembly
+; -----------------------------
+; LCD Interfacing in 8-Bit Mode
+; -----------------------------
+
+ORG 0H               ; Origin directive to set the program memory address
+
+; Define LCD Port
+LCD_DATA  EQU P2     ; Data port (P2 for 8-bit mode)
+LCD_CTRL  EQU P1     ; Control port (RS, RW, E)
+
+; Control signals
+RS       EQU 0       ; Register Select
+RW       EQU 1       ; Read/Write
+E        EQU 2       ; Enable
+
+; Initialize the LCD
+LCD_INIT:
+    MOV LCD_DATA, #38      ; 8-bit mode, 2 lines, 5x7 dots
+    ACALL LCD_CMD          ; Send command
+    MOV LCD_DATA, #0C      ; Display ON, Cursor OFF
+    ACALL LCD_CMD          ; Send command
+    MOV LCD_DATA, #01      ; Clear display
+    ACALL LCD_CMD          ; Send command
+    RET
+
+; Send command to LCD
+LCD_CMD:
+    CLR LCD_CTRL. RS       ; RS = 0 for command
+    CLR LCD_CTRL. RW       ; RW = 0 for write
+    SETB LCD_CTRL. E       ; Enable high
+    NOP                     ; Small delay
+    CLR LCD_CTRL. E        ; Enable low
+    RET
+
+; Send data to LCD
+LCD_DATA:
+    SETB LCD_CTRL. RS      ; RS = 1 for data
+    CLR LCD_CTRL. RW       ; RW = 0 for write
+    SETB LCD_CTRL. E       ; Enable high
+    NOP                     ; Small delay
+    CLR LCD_CTRL. E        ; Enable low
+    RET
+
+; Function to send a string to the LCD
+SEND_STRING:
+    MOV DPTR, #STRING      ; Load the address of the string
+NEXT_CHAR:
+    MOV A, @DPTR           ; Get the character
+    JZ DONE                ; If null terminator, exit
+    ACALL LCD_DATA         ; Send character to LCD
+    INC DPTR               ; Move to next character
+    SJMP NEXT_CHAR         ; Repeat until the end
+DONE:
+    RET
+
+; String to display
+STRING:
+    DB 'Hello, World!', 0  ; Null-terminated string
+
+; Main program
+MAIN:
+    ACALL LCD_INIT          ; Initialize the LCD
+    ACALL SEND_STRING       ; Send string to LCD
+    SJMP MAIN               ; Infinite loop
+
+END                     ; End of program
+```
+
+### Code Explanation
+
+- **LCD Initialization**: The `LCD_INIT` procedure sets the LCD in 8-bit mode, turns on the display, and clears it.
+- **Command and Data Functions**: `LCD_CMD` sends commands to the LCD, while `LCD_DATA` sends data (characters).
+- **String Sending**: The `SEND_STRING` procedure sends a null-terminated string to the LCD for display.
+- **Main Program**: The `MAIN` procedure initializes the LCD and sends the string to display.
+
+### Usage
+
+1. **Save the Code**: Copy this code into a file named `lcd.asm`.
+2. **Compile**: Use a compatible assembler to compile the code.
+3. **Simulate or Upload**: Use Proteus for simulation or upload it to the AT89C51 microcontroller.
+
+Feel free to modify the string or commands to fit your specific requirements! 
+
+
+
 ## 📚 **Learn More**
 
 You can explore additional resources for further learning:
@@ -290,6 +380,8 @@ You can explore additional resources for further learning:
   <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_4B_8051_Ckt.png" alt="4-bit LCD Circuit" width="70%">
 </p>
 ```
+
+
 
 ### Key Features of the Code:
 - **Content for Each Section**: Every section outlined in the table of contents has been fulfilled with detailed descriptions, code snippets, and relevant diagrams.
