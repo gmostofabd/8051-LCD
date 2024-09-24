@@ -278,6 +278,159 @@ For more projects and tutorials, visit [EmbeTronicX](https://www.embetronicx.com
 
 ---
 
+
+### Assembly Code for 8-Bit Mode LCD Interfacing 
+
+```assembly 
+; -----------------------------
+; LCD Interfacing in 8-Bit Mode (lcd_8bit.asm)
+; -----------------------------
+
+ORG 00H                  ; Set origin to address 00H
+
+MOV SP, #70H             ; Initialize stack pointer at address 70H
+MOV PSW, #00H            ; Set program status word to 00H
+
+LCD_IN: 
+    MOV A, #38H          ; Initialize LCD for 2 lines, 5x7 matrix
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #0EH          ; Display ON, Cursor ON
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #01H          ; Clear LCD display
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #06H          ; Shift cursor to the right
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #85H          ; Set cursor at line 1, position 1
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'E'          ; Display letter 'E'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'X'          ; Display letter 'X'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'P'          ; Display letter 'P'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #':'          ; Display colon ':'
+    LCALL DATAWRT        ; Call data write subroutine
+    MOV A, #'0'          ; Display number '0'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'4'          ; Display number '4'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+
+    MOV A, #0C3H         ; Set cursor at line 2, position 1
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+
+    MOV A, #'8'          ; Display number '8'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #' '          ; Display space
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'B'          ; Display letter 'B'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'i'          ; Display letter 'i'
+    LCALL DATAWRT        ; Call data write subroutine
+    MOV A, #'t'          ; Display letter 't'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #' '          ; Display space
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'L'          ; Display letter 'L'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'C'          ; Display letter 'C'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'D'          ; Display letter 'D'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    SJMP $               ; Infinite loop
+
+; -----------------------------
+; Command Write Subroutine
+; -----------------------------
+COMNWRT:
+    LCALL READY          ; Prepare for sending command to LCD
+    MOV P1, A            ; Copy content of register A to port 1
+    CLR P3.4             ; Set RS = 0 for command mode
+    CLR P3.5             ; Set R/W = 0 for write mode
+    SETB P3.6            ; Set E high for pulse
+    ACALL DELAY          ; Give LCD some time
+    CLR P3.6             ; Set E low for H-to-L pulse
+    RET
+
+; -----------------------------
+; Data Write Subroutine
+; -----------------------------
+DATAWRT:
+    LCALL READY          ; Prepare for writing data to LCD
+    MOV P1, A            ; Copy content of register A to port 1
+    SETB P3.4            ; Set RS = 1 for data mode
+    CLR P3.5             ; Set R/W = 0 for write mode
+    SETB P3.6            ; Set E high for pulse
+    ACALL DELAY          ; Give LCD some time
+    CLR P3.6             ; Set E low for H-to-L pulse
+    RET
+
+; -----------------------------
+; Ready Check Subroutine
+; -----------------------------
+READY:
+    SETB P1.7            ; Set P1.7 to indicate readiness
+    CLR P3.4             ; Clear RS
+    SETB P3.5            ; Set R/W = 1 for read mode
+
+WAIT:
+    CLR P3.6             ; Clear E
+    ACALL DELAY          ; Wait for delay
+    SETB P3.6            ; Set E high
+    JB P1.7, WAIT        ; Wait until P1.7 is high (LCD ready)
+    RET
+
+; -----------------------------
+; Delay Subroutine
+; -----------------------------
+DELAY:
+    MOV R3, #50          ; Set outer loop count (50 or higher for fast CPUs)
+HERE2:
+    MOV R4, #255         ; Set inner loop count (255)
+HERE:
+    DJNZ R4, HERE        ; Decrement R4 and repeat until it reaches 0
+    DJNZ R3, HERE2       ; Decrement R3 and repeat until it reaches 0
+    RET
+
+END                     ; End of program
+
+```
+
+### Code Explanation
+
+- **LCD Initialization**: The `LCD_INIT` procedure sets the LCD in 8-bit mode, turns on the display, and clears it.
+- **Command and Data Functions**: `LCD_CMD` sends commands to the LCD, while `LCD_DATA` sends data (characters).
+- **String Sending**: The `SEND_STRING` procedure sends a null-terminated string to the LCD for display.
+- **Main Program**: The `MAIN` procedure initializes the LCD and sends the string to display.
+
+### Usage
+
+1. **Save the Code**: Copy this code into a file named `lcd.asm`.
+2. **Compile**: Use a compatible assembler to compile the code.
+3. **Simulate or Upload**: Use Proteus for simulation or upload it to the AT89C51 microcontroller.
+
+Feel free to modify the string or commands to fit your specific requirements! 
+
+
+
 ## 📚 **Learn More**
 
 You can explore additional resources for further learning:
@@ -290,6 +443,8 @@ You can explore additional resources for further learning:
   <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_4B_8051_Ckt.png" alt="4-bit LCD Circuit" width="70%">
 </p>
 ```
+
+
 
 ### Key Features of the Code:
 - **Content for Each Section**: Every section outlined in the table of contents has been fulfilled with detailed descriptions, code snippets, and relevant diagrams.
