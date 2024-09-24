@@ -278,77 +278,140 @@ For more projects and tutorials, visit [EmbeTronicX](https://www.embetronicx.com
 
 ---
 
-###  Here's a simple assembly code example for interfacing a **16x2 LCD** with the **AT89C51 microcontroller** in **8-bit mode**. This code initializes the LCD, sends commands, and displays a string. 
 
-### Assembly Code for 8-Bit Mode LCD Interfacing
+### Assembly Code for 8-Bit Mode LCD Interfacing 
 
-```assembly
+```assembly 
 ; -----------------------------
-; LCD Interfacing in 8-Bit Mode
+; LCD Interfacing in 8-Bit Mode (lcd_8bit.asm)
 ; -----------------------------
 
-ORG 0H               ; Origin directive to set the program memory address
+ORG 00H                  ; Set origin to address 00H
 
-; Define LCD Port
-LCD_DATA  EQU P2     ; Data port (P2 for 8-bit mode)
-LCD_CTRL  EQU P1     ; Control port (RS, RW, E)
+MOV SP, #70H             ; Initialize stack pointer at address 70H
+MOV PSW, #00H            ; Set program status word to 00H
 
-; Control signals
-RS       EQU 0       ; Register Select
-RW       EQU 1       ; Read/Write
-E        EQU 2       ; Enable
+LCD_IN: 
+    MOV A, #38H          ; Initialize LCD for 2 lines, 5x7 matrix
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #0EH          ; Display ON, Cursor ON
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #01H          ; Clear LCD display
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #06H          ; Shift cursor to the right
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #85H          ; Set cursor at line 1, position 1
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'E'          ; Display letter 'E'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'X'          ; Display letter 'X'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'P'          ; Display letter 'P'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #':'          ; Display colon ':'
+    LCALL DATAWRT        ; Call data write subroutine
+    MOV A, #'0'          ; Display number '0'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'4'          ; Display number '4'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
 
-; Initialize the LCD
-LCD_INIT:
-    MOV LCD_DATA, #38      ; 8-bit mode, 2 lines, 5x7 dots
-    ACALL LCD_CMD          ; Send command
-    MOV LCD_DATA, #0C      ; Display ON, Cursor OFF
-    ACALL LCD_CMD          ; Send command
-    MOV LCD_DATA, #01      ; Clear display
-    ACALL LCD_CMD          ; Send command
+    MOV A, #0C3H         ; Set cursor at line 2, position 1
+    LCALL COMNWRT        ; Call command write subroutine
+    LCALL DELAY          ; Give LCD some time
+
+    MOV A, #'8'          ; Display number '8'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #' '          ; Display space
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'B'          ; Display letter 'B'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'i'          ; Display letter 'i'
+    LCALL DATAWRT        ; Call data write subroutine
+    MOV A, #'t'          ; Display letter 't'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #' '          ; Display space
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'L'          ; Display letter 'L'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'C'          ; Display letter 'C'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    MOV A, #'D'          ; Display letter 'D'
+    LCALL DATAWRT        ; Call data write subroutine
+    LCALL DELAY          ; Give LCD some time
+    SJMP $               ; Infinite loop
+
+; -----------------------------
+; Command Write Subroutine
+; -----------------------------
+COMNWRT:
+    LCALL READY          ; Prepare for sending command to LCD
+    MOV P1, A            ; Copy content of register A to port 1
+    CLR P3.4             ; Set RS = 0 for command mode
+    CLR P3.5             ; Set R/W = 0 for write mode
+    SETB P3.6            ; Set E high for pulse
+    ACALL DELAY          ; Give LCD some time
+    CLR P3.6             ; Set E low for H-to-L pulse
     RET
 
-; Send command to LCD
-LCD_CMD:
-    CLR LCD_CTRL. RS       ; RS = 0 for command
-    CLR LCD_CTRL. RW       ; RW = 0 for write
-    SETB LCD_CTRL. E       ; Enable high
-    NOP                     ; Small delay
-    CLR LCD_CTRL. E        ; Enable low
+; -----------------------------
+; Data Write Subroutine
+; -----------------------------
+DATAWRT:
+    LCALL READY          ; Prepare for writing data to LCD
+    MOV P1, A            ; Copy content of register A to port 1
+    SETB P3.4            ; Set RS = 1 for data mode
+    CLR P3.5             ; Set R/W = 0 for write mode
+    SETB P3.6            ; Set E high for pulse
+    ACALL DELAY          ; Give LCD some time
+    CLR P3.6             ; Set E low for H-to-L pulse
     RET
 
-; Send data to LCD
-LCD_DATA:
-    SETB LCD_CTRL. RS      ; RS = 1 for data
-    CLR LCD_CTRL. RW       ; RW = 0 for write
-    SETB LCD_CTRL. E       ; Enable high
-    NOP                     ; Small delay
-    CLR LCD_CTRL. E        ; Enable low
+; -----------------------------
+; Ready Check Subroutine
+; -----------------------------
+READY:
+    SETB P1.7            ; Set P1.7 to indicate readiness
+    CLR P3.4             ; Clear RS
+    SETB P3.5            ; Set R/W = 1 for read mode
+
+WAIT:
+    CLR P3.6             ; Clear E
+    ACALL DELAY          ; Wait for delay
+    SETB P3.6            ; Set E high
+    JB P1.7, WAIT        ; Wait until P1.7 is high (LCD ready)
     RET
 
-; Function to send a string to the LCD
-SEND_STRING:
-    MOV DPTR, #STRING      ; Load the address of the string
-NEXT_CHAR:
-    MOV A, @DPTR           ; Get the character
-    JZ DONE                ; If null terminator, exit
-    ACALL LCD_DATA         ; Send character to LCD
-    INC DPTR               ; Move to next character
-    SJMP NEXT_CHAR         ; Repeat until the end
-DONE:
+; -----------------------------
+; Delay Subroutine
+; -----------------------------
+DELAY:
+    MOV R3, #50          ; Set outer loop count (50 or higher for fast CPUs)
+HERE2:
+    MOV R4, #255         ; Set inner loop count (255)
+HERE:
+    DJNZ R4, HERE        ; Decrement R4 and repeat until it reaches 0
+    DJNZ R3, HERE2       ; Decrement R3 and repeat until it reaches 0
     RET
-
-; String to display
-STRING:
-    DB 'Hello, World!', 0  ; Null-terminated string
-
-; Main program
-MAIN:
-    ACALL LCD_INIT          ; Initialize the LCD
-    ACALL SEND_STRING       ; Send string to LCD
-    SJMP MAIN               ; Infinite loop
 
 END                     ; End of program
+
 ```
 
 ### Code Explanation
