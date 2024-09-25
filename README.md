@@ -12,7 +12,7 @@ This repository demonstrates how to interface a **16x2 alphanumeric LCD** with t
     <b style="font-size: 1.5em;">Fig. 01: 8051 Microcontroller LCD Interface ( Schematic Diagram ).</b>
   </p>
   
-  <p style="font-size: 1em; color: #555;">This diagram represents the <strong>circuit for interfacing the 16x2 LCD</strong> with the 8051 series <strong>AT89C51 Microcontroller</strong>. It includes essential connections for data transfer, control, and power, enabling the display of alphanumeric characters using <strong>8-bit data mode</strong>.</p>
+  <p style="font-size: 1em; color: #555;">Above Diagram represents the <strong>circuit schematic for interfacing the 16x2 LCD</strong> with the 8051 series <strong>AT89C51 Microcontroller</strong>. It includes essential connections for data transfer, control, and power, enabling the display of alphanumeric characters using <strong>8-bit data mode</strong>.</p>
 
 </div>
 
@@ -39,24 +39,13 @@ This project demonstrates the **interfacing of a LCD** with the **[AT89C51](http
 | 📟 **LCD Display**              | Displays user input and output results                                     |
 | 🖥️ **Proteus Simulation**      | Ready-to-use simulation circuit compatible with Proteus 8.9                |
 | 💾 **Assembly Programming**    | Optimized assembly code for efficient execution on the AT89C51              |
-| 🛠️ **Real Hardware Support**   | Successfully tested on actual hardware for reliable performance              |
+| 🛠️ **Real Hardware Test**   | Successfully tested on actual hardware for reliable performance              |
 
 </div>
 
 ---
 
-# 📦 **What’s Included?**
 
-<div align="center">
-
-| **File**               | **Description**                                                         |
-|------------------------|-------------------------------------------------------------------------|
-| **Assembly Code**       | The core assembly code that handles the initialization and operation of the LCD. You will find it as a file name "exampleproject.asm" |
-| **Proteus Simulation**  | A ready-to-use simulation file to test the LCD interface in Proteus.  You will find it as a file name "exampleproject.pdsjr"    |
-| **HEX File**            | The compiled HEX file for uploading to the 8051 microcontroller.  You will find it as a file name "exampleproject.hex"       |
-| **Test Run Image**      | Image showing the test run result.                                      |
-
-</div>
 
 ## 📑 **Table of Contents**
 1. [LCD Display](#lcd-display)
@@ -76,13 +65,31 @@ This project demonstrates the **interfacing of a LCD** with the **[AT89C51](http
 
 ---
 
-## 🖥️ **Installation & Usage**
 
+
+
+
+
+
+# 📦 **What’s Included?**
+
+<div align="center">
+
+| **File**               | **Description**                                                         |
+|------------------------|-------------------------------------------------------------------------|
+| **Assembly Code**       | The core assembly code that handles the initialization and operation of the LCD. You will find it as a file name "exampleproject.asm" |
+| **Proteus Simulation**  | A ready-to-use simulation file to test the LCD interface in Proteus.  You will find it as a file name "exampleproject.pdsjr"    |
+| **HEX File**            | The compiled HEX file for uploading to the 8051 microcontroller.  You will find it as a file name "exampleproject.hex"       |
+| **Test Run Image**      | Image showing the test run result.                                      |
+
+</div>
+
+## 🖥️ **Installation & Usage**
 ### **Step-by-Step Guide:**
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/gmostofabd/AT89C51_LCD_Keypad_Interfacing.git
+   git clone https://github.com/gmostofabd/8051-LCD.git
    ```
 
 2. **Compile the Assembly Code**:
@@ -117,15 +124,30 @@ The main components used in this project include:
 | **Power Supply**                | A 5V DC power supply for the microcontroller and LCD circuit              |
 
 </div>
-
+Components Required 
+AT89C51 (8051 Microcontroller)
+16X2 LCD Display
+11.0592MHz Crystal
+2 X 33pF Capacitors 
+2 X 10 KΩ Resistors
+1 KΩ X 8 Resistor Pack 
+10 KΩ Potentiometer 
+330Ω Resistor 
+Push Button 
+10μF/16V Capacitor 
+8051 Programmer 
+5V Power Supply 
+Connecting Wires
 ---
 
 ## 📚 **LCD Display**
-<p align="center">
-  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/lcd_models.png" alt="AT89C51 Calculator" width="70%">
-</p>
-The **16x2 LCD** can display 2 lines of 16 characters each. It uses a parallel interface for data communication, making it easy to connect to microcontrollers. The LCD operates in two modes: command mode and data mode.
+Liquid Crystal Display also called as LCD is very helpful in providing user interface as well as for debugging purpose. A liquid crystal display (LCD) is a flat panel display that uses the light modulating properties of liquid crystals (LCs). LCD Modules can present textual information to user.
 
+
+<p align="center">
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/lcd_models.png" alt="LCD Types" width="70%">
+</p>
+Display units are the most important output devices in embedded projects and electronics products. 16x2 LCD is one of the most used display unit. 16x2 LCD means that there are two rows in which 16 characters can be displayed per line, and each character takes 5X7 matrix space on LCD.
 ---
 
 ## 📚 **16×2 LCD Pin Diagram**
@@ -159,18 +181,16 @@ The following table shows the pin configuration of the **16x2 LCD**:
 
 ---
 
-## 📚 **Pin Description**
 
-- **VSS**: Connect to ground.
-- **VCC**: Connect to +5V power supply.
-- **V0**: Adjusts the contrast of the LCD.
-- **RS**: Used to select between command mode (RS=0) and data mode (RS=1).
-- **RW**: Used to select read or write operations (RW=0 for write, RW=1 for read).
-- **E**: The enable pin, which is triggered to perform the read/write operation.
-- **D0-D7**: Data pins used to send data to the LCD.
-- **A** and **K**: Pins for powering the LCD backlight.
 
 ---
+#  Programming LCD to 8051
+Coming to the programming you should follow these steps:
+
+STEP1: Initialization of LCD.
+STEP2: Sending commands to LCD.
+STEP3: Writing the data to LCD.
+
 
 ## 📚 **LCD Commands**
 
@@ -190,60 +210,35 @@ Some common LCD
 
 ---
 
+##  Initializing LCD
+To initialize LCD to the 8051 the following instruction and commands are to be embed in to the functions
 
-### **Send Data**
+-  0x38 is used for 8-bit data initialization.
+-  0xoC for making LCD display on and cursor off.
+-  0X01 for clearing the display of the LCD.
+-  0x80 for positioning the cursor at first line .
 
+
+##  Sending Commands to the LCD
+This function sends commands to the LCD for various operations like clearing the display or moving the cursor.
+-  E=1; enable pin should be high.
+-  RS=0; Register select should be low for sending commands.
+-  Placing the data on the data registers
+-  R/W=0; Read/Write pin should be low for writing the data.
+
+
+##  Writing the Data to the LCD
 This function sends a single byte of data to the LCD. The RS pin is set to 1 for data mode, and the enable pin is triggered to transfer the data.
 
-```assembly
-lcd_data:
-    ; Code to send data to the LCD
-    ; RS = 1 for data
-    ; Set D0-D7 with data
-    ; Trigger E pin
-    ret
-```
+-  E=1; enable pin should be high
+-  RS=1; Register select should be high for writing data
+-  Placing the data on the data registers
+-  R/W=0; Read/Write pin should be low for writing the data.
+-  Important Post – Interfacing 7 Segment Display with 8051 Microcontroller
 
-### **Send String**
 
-This function allows you to send a string of characters to the LCD by repeatedly calling the `lcd_data` function.
 
-```assembly
-lcd_string:
-    ; Code to send a string to the LCD
-    ret
-```
 
-### **Send Command**
-
-This function sends commands to the LCD for various operations like clearing the display or moving the cursor.
-
-```assembly
-lcd_cmd:
-    ; Code to send command to the LCD
-    ; RS = 0 for command
-    ; Set D0-D7 with command
-    ; Trigger E pin
-    ret
-```
-
-### **LCD Initializing**
-
-The initialization function sets up the LCD in the correct mode, clears the display, and prepares it for data input.
-
-```assembly
-lcd_init:
-    ; Code to initialize the LCD
-    ret
-```
-
----
-
-## 📚 **LCD Interfacing with 8051 – Full Code**
-
-The complete assembly code for interfacing the LCD with the AT89C51 microcontroller can be found in the file `exampleproject.asm`. It includes functions for initialization, sending commands, and displaying data.
-
----
 
 ## 📚 **LCD Interfacing with 8051 – Working**
 
@@ -283,7 +278,7 @@ For more projects and tutorials, visit [EmbeTronicX](https://www.embetronicx.com
 
 ```assembly 
 ; -----------------------------
-; LCD Interfacing in 8-Bit Mode (lcd_8bit.asm)
+; LCD Interfacing to 8051 Microcontroller (AT89S52) in 8-Bit Mode (lcd_8bit.asm)
 ; -----------------------------
 
 ORG 00H                  ; Set origin to address 00H
@@ -415,11 +410,18 @@ END                     ; End of program
 ```
 
 ### Code Explanation
+I have tried to explain the code through comments (in code itself).
 
 - **LCD Initialization**: The `LCD_INIT` procedure sets the LCD in 8-bit mode, turns on the display, and clears it.
 - **Command and Data Functions**: `LCD_CMD` sends commands to the LCD, while `LCD_DATA` sends data (characters).
 - **String Sending**: The `SEND_STRING` procedure sends a null-terminated string to the LCD for display.
 - **Main Program**: The `MAIN` procedure initializes the LCD and sends the string to display.
+
+
+### Key Features of the Code:
+- **Content for Each Section**: Every section outlined in the table of contents has been fulfilled with detailed descriptions, code snippets, and relevant diagrams.
+- **Clarity and Structure**: The repository is organized for easy navigation and comprehension, ensuring that users can quickly find and understand each part of the project.
+- **Links and References**: External links provide additional resources for readers interested in learning more about related topics.
 
 ### Usage
 
@@ -443,12 +445,5 @@ You can explore additional resources for further learning:
   <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_4B_8051_Ckt.png" alt="4-bit LCD Circuit" width="70%">
 </p>
 ```
+##  Additional Codes:
 
-
-
-### Key Features of the Code:
-- **Content for Each Section**: Every section outlined in the table of contents has been fulfilled with detailed descriptions, code snippets, and relevant diagrams.
-- **Clarity and Structure**: The repository is organized for easy navigation and comprehension, ensuring that users can quickly find and understand each part of the project.
-- **Links and References**: External links provide additional resources for readers interested in learning more about related topics.
-
-Feel free to make any adjustments or let me know if you need further enhancements!
