@@ -136,21 +136,6 @@ To interface with the **16x2 LCD**, follow these mandatory steps:
 
 ---
 
-## 🌐 **LCD Interfacing with 8051 – Working**
-
-Upon powering the circuit, the **AT89C51 microcontroller** initializes the LCD and sends a message to be displayed. This can be tested through simulation or real hardware.
-
----
-
-## 📝 **Tasks**
-
-- Verify the connections based on the schematic.
-- Modify the code to display different messages.
-- Experiment with the contrast and observe its effects.
-
----
-
-
 ### Assembly Code for 8-Bit Mode LCD Interfacing 
 
 ```assembly 
@@ -298,10 +283,20 @@ END                     ; End of program
 2. **Compile**: Use a compatible assembler to compile the code.
 3. **Simulate or Upload**: Use Proteus for simulation or upload it to the AT89C51 microcontroller.
 
-Feel free to modify the string or commands to fit your specific requirements! 
 
+## 🌐 **LCD Interfacing with 8051 – Working**
 
+Upon powering the circuit, the **AT89C51 microcontroller** initializes the LCD and sends a message to be displayed. This can be tested through simulation or real hardware.
 
+---
+
+## 📝 **Tasks**
+
+- Verify the connections based on the schematic.
+- Modify the code to display different messages.
+- Experiment with the contrast and observe its effects.
+
+---
 
 ## 🔗 **Resources**
 
@@ -312,7 +307,5 @@ Feel free to modify the string or commands to fit your specific requirements!
 
 ### 🛠️ **Future Work**
 - Adding more functionalities such as scrolling text, custom characters, and additional interfacing techniques like 4-bit mode.
-
-Feel free to reach out if you have any questions or suggestions for improving this project!
 
 ---
