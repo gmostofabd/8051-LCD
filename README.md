@@ -270,6 +270,7 @@ HERE:
 END                     ; End of program
 
 ```
+
 ### Code Explanation
 
 - **LCD Initialization**: The `LCD_INIT` procedure sets the LCD in 8-bit mode, turns on the display, and clears it.
