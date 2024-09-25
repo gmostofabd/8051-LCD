@@ -290,6 +290,34 @@ Upon powering the circuit, the **AT89C51 microcontroller** initializes the LCD a
 
 ---
 
+
+## 📜 **LCD Commands Table**
+
+<div align="center">
+
+| **Command**                       | **Hex Code** | **Description**                                       |
+|-----------------------------------|--------------|-------------------------------------------------------|
+| **Clear Display**                 | `0x01`      | Clears the LCD and resets the cursor to home position. |
+| **Return Home**                   | `0x02`      | Returns the cursor to the home position.              |
+| **Entry Mode Set**                | `0x04`      | Sets the entry mode; cursor moves to the right.       |
+| **Display ON/OFF Control**        | `0x0C`      | Turns the display on with the cursor off.             |
+| **Cursor ON/OFF Control**         | `0x0E`      | Turns the cursor on, but without blinking.            |
+| **Blinking Cursor ON**            | `0x0F`      | Turns the blinking cursor on.                          |
+| **Shift Display Right**           | `0x1C`      | Shifts the entire display to the right.                |
+| **Shift Display Left**            | `0x18`      | Shifts the entire display to the left.                 |
+| **Function Set**                  | `0x38`      | Sets the interface to 8-bit, 2-line mode with 5x7 dots. |
+| **Set Cursor Position**           | `0x80`      | Sets the cursor position to the specified address.     |
+| **Scroll Display Right**          | `0x1C`      | Scrolls the display right.                             |
+| **Scroll Display Left**           | `0x18`      | Scrolls the display left.                              |
+| **Set CGRAM Address**             | `0x40`      | Sets the address for the character generator RAM.      |
+| **Set DDRAM Address**             | `0x80`      | Sets the address for the display data RAM.             |
+
+</div>
+
+---
+
+
+
 ## 📝 **Tasks**
 
 - Verify the connections based on the schematic.
@@ -307,5 +335,9 @@ Upon powering the circuit, the **AT89C51 microcontroller** initializes the LCD a
 
 ### 🛠️ **Future Work**
 - Adding more functionalities such as scrolling text, custom characters, and additional interfacing techniques like 4-bit mode.
-
+---
+<p align="center">
+  <img src="https://github.com/gmostofabd/8051-LCD/blob/82e89081c795286c466389d6ac5c34e6ec4a8050/assets/images/LCD_4B_8051_Ckt.png" alt="4-bit LCD Circuit" width="70%">
+</p>
+```
 ---
